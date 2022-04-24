@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>f58898b7-c674-4ef5-8526-81a4fff63937</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\img"/>
+    </ItemGroup>
+
+</Project>
