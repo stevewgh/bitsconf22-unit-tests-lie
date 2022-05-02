@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace HudlWeather.Services.WeatherGatewayDto;
+namespace Hudl.Weather.Services.WeatherGatewayDto;
 
 public class Clouds
 {

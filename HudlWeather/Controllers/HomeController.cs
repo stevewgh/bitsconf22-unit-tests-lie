@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
+using Hudl.Weather.Models;
+using Hudl.Weather.Services;
 using Microsoft.AspNetCore.Mvc;
-using HudlWeather.Models;
-using HudlWeather.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace HudlWeather.Controllers;
+namespace Hudl.Weather.Controllers;
 
 public class HomeController : Controller
 {

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using HudlWeather.Config;
-using HudlWeather.Services;
+using Hudl.Weather.Config;
+using Hudl.Weather.Services;
 using Microsoft.Extensions.Options;
 using Xunit;
 
-namespace HudlWeather.Tests.Integration;
+namespace Hudl.Weather.Tests.Integration;
 
 public class WeatherGatewayServiceTests
 {

@@ -1,8 +1,8 @@
-using HudlWeather.Config;
-using HudlWeather.Services.WeatherGatewayDto;
+using Hudl.Weather.Config;
+using Hudl.Weather.Services.WeatherGatewayDto;
 using Microsoft.Extensions.Options;
 
-namespace HudlWeather.Services;
+namespace Hudl.Weather.Services;
 
 public class WeatherGatewayService : IWeatherGatewayService
 {

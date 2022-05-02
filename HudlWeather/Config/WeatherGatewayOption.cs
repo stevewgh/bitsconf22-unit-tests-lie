@@ -1,4 +1,4 @@
-namespace HudlWeather.Config;
+namespace Hudl.Weather.Config;
 
 public class WeatherGatewayOption
 {

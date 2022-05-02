@@ -1,6 +1,6 @@
-using HudlWeather.Services.WeatherGatewayDto;
+using Hudl.Weather.Services.WeatherGatewayDto;
 
-namespace HudlWeather.Services;
+namespace Hudl.Weather.Services;
 
 public interface IWeatherGatewayService
 {

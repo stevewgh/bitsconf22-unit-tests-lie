@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
-using HudlWeather.Controllers;
-using HudlWeather.Models;
-using HudlWeather.Services;
+using Hudl.Weather.Controllers;
+using Hudl.Weather.Models;
+using Hudl.Weather.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace HudlWeather.Tests.Unit;
+namespace Hudl.Weather.Tests.Unit;
 
 public class HomeControllerTests
 {
@@ -18,7 +18,7 @@ public class HomeControllerTests
         var sut = new HomeController(Mock.Of<IWeatherGatewayService>());
 
         var urlHelper = new Mock<IUrlHelper>();
-        urlHelper.Setup(helper => helper.Content(It.IsAny<string?>())).Returns("test");
+        urlHelper.Setup(helper => helper.Content(It.IsAny<string?>())).Returns("/doesnt_matter");
         sut.Url = urlHelper.Object;
         
         var result = sut.Index() as ViewResult;
@@ -33,7 +33,7 @@ public class HomeControllerTests
         var sut = new HomeController(Mock.Of<IWeatherGatewayService>());
 
         var urlHelper = new Mock<IUrlHelper>();
-        urlHelper.Setup(helper => helper.Content(It.IsAny<string?>())).Returns("test");
+        urlHelper.Setup(helper => helper.Content(It.IsAny<string?>())).Returns("/doesnt_matter");
         sut.Url = urlHelper.Object;
         
         var result = sut.Index(Location.Office) as ViewResult;

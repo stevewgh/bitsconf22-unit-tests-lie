@@ -1,4 +1,4 @@
-namespace HudlWeather.Services;
+namespace Hudl.Weather.Services;
 
 public enum Location
 {

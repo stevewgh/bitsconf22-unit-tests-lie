@@ -1,4 +1,4 @@
-namespace HudlWeather.Models;
+namespace Hudl.Weather.Models;
 
 public class ErrorViewModel
 {
