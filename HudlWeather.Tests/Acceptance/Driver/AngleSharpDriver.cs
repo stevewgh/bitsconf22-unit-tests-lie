@@ -8,7 +8,7 @@ using AngleSharp.Html.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using TechTalk.SpecFlow;
 
-namespace HudlWeather.Tests.Acceptance.Driver;
+namespace Hudl.Weather.Tests.Acceptance.Driver;
 
 public class AngleSharpDriver
 {

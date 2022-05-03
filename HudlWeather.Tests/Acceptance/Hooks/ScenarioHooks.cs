@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechTalk.SpecFlow;
 
-namespace HudlWeather.Tests.Acceptance.Hooks;
+namespace Hudl.Weather.Tests.Acceptance.Hooks;
 
 [Binding]
 public class ScenarioHooks

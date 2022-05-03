@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Hudl.Weather.Services;
 using Hudl.Weather.Services.WeatherGatewayDto;
 
-namespace HudlWeather.Tests;
+namespace Hudl.Weather.Tests;
 
 public class WeatherGatewayTestDouble : IWeatherGatewayService
 {
@@ -12,13 +12,13 @@ public class WeatherGatewayTestDouble : IWeatherGatewayService
         {
             return Task.FromResult(new Forecast
             {
-                Weather = new[] {new Weather() {Main = "Cloudy"}}
+                Weather = new[] {new Services.WeatherGatewayDto.Weather() {Main = "Cloudy"}}
             });
         }
 
         return Task.FromResult(new Forecast
         {
-            Weather = new[] {new Weather() {Main = "Sunny"}}
+            Weather = new[] {new Services.WeatherGatewayDto.Weather() {Main = "Sunny"}}
         });
     }
 }

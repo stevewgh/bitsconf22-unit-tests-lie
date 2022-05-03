@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Hudl.Weather.Controllers;
 using Hudl.Weather.Models;
 using Hudl.Weather.Services;
-using HudlWeather.Tests;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;

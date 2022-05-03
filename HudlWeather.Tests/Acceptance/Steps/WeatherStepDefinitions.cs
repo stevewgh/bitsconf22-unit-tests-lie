@@ -2,12 +2,10 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Hudl.Weather.Services;
-using Hudl.Weather.Services.WeatherGatewayDto;
-using HudlWeather.Tests.Acceptance.Driver;
-using Moq;
+using Hudl.Weather.Tests.Acceptance.Driver;
 using TechTalk.SpecFlow;
 
-namespace HudlWeather.Tests.Acceptance.Steps;
+namespace Hudl.Weather.Tests.Acceptance.Steps;
 
 [Binding]
 public class WeatherStepDefinitions
