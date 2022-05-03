@@ -1,5 +1,6 @@
 using Hudl.Weather.Config;
 using Hudl.Weather.Services;
+using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IWeatherGatewayService, WeatherGatewayService>();
 builder.Services.AddOptions<WeatherGatewayOption>().BindConfiguration(configSectionPath:"WeatherGateway");
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields = HttpLoggingFields.RequestPath | HttpLoggingFields.RequestMethod;
+});
 
 var app = builder.Build();
+
+app.UseHttpLogging();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <UserSecretsId>2ab63595-9410-41c7-8875-f31d3dfe56db</UserSecretsId>
+        <RootNamespace>Hudl.Weather.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

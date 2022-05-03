@@ -1,0 +1,46 @@
+using System;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Hudl.Weather.Services;
+using Hudl.Weather.Services.WeatherGatewayDto;
+using HudlWeather.Tests.Acceptance.Driver;
+using Moq;
+using TechTalk.SpecFlow;
+
+namespace HudlWeather.Tests.Acceptance.Steps;
+
+[Binding]
+public class WeatherStepDefinitions
+{
+    private readonly AngleSharpDriver _driver;
+
+    public WeatherStepDefinitions(AngleSharpDriver driver)
+    {
+        _driver = driver ?? throw new ArgumentNullException(nameof(driver));
+        _driver.AddTestService<IWeatherGatewayService>(new WeatherGatewayTestDouble());
+    }
+
+    [When(@"the default page is shown")]
+    public async Task WhenTheDefaultPageIsShown()
+    {
+        await _driver.LoadDefaultPage();
+    }
+
+    [Then(@"the home weather conditions are displayed")]
+    public void ThenTheHomeWeatherConditionsAreDisplayed()
+    {
+        _driver.SelectedLocation.Should().Be("Home");
+    }
+
+    [Given(@"the user selected the (.*) location")]
+    public async Task GivenAUserSelectedALocation(string location)
+    {
+        await _driver.SelectLocation(location);
+    }
+    
+    [Then(@"the location name (.*) is displayed")]
+    public void ThenTheLocationNameIsDisplayed(string locationName)
+    {
+        _driver.SelectedLocationText.Should().Be(locationName);
+    }
+}

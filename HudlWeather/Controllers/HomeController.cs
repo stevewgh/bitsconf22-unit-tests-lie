@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Hudl.Weather.Models;
+﻿using Hudl.Weather.Models;
 using Hudl.Weather.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,28 +11,34 @@ public class HomeController : Controller
 
     public HomeController(IWeatherGatewayService weatherGatewayService)
     {
-        _weatherGatewayService =
-            weatherGatewayService ?? throw new ArgumentNullException(nameof(weatherGatewayService));
+        _weatherGatewayService = weatherGatewayService ?? throw new ArgumentNullException(nameof(weatherGatewayService));
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var cloudy = this.Url.Content("~/img/cloudy.jpg");
         SetViewBagLocation(Location.Home);
-        return View(new WeatherViewModel(cloudy, "Home"));
+        return View(await WeatherAtLocation(Location.Home));
     }
 
     [HttpPost]
-    public IActionResult Index([FromForm] Location weatherLocation)
+    public async Task<IActionResult> Index([FromForm] Location weatherLocation)
     {
-        var cloudy = this.Url.Content("~/img/cloudy.jpg");
-        var sunny = this.Url.Content("~/img/sunny.jpg");
-        
         SetViewBagLocation(weatherLocation);
-
-        return View(new WeatherViewModel(cloudy, weatherLocation.ToString()));
+        return View(await WeatherAtLocation(weatherLocation));
     }
 
+    private async Task<WeatherViewModel> WeatherAtLocation(Location location)
+    {
+        var forecast = await _weatherGatewayService.Forecast(location);
+        var weatherImageUri = forecast?.Weather.FirstOrDefault() switch
+        {
+            { } weather when weather.Main.StartsWith("Cloud") => Url.Content("~/img/cloudy.jpg"),
+            _ => Url.Content("~/img/sunny.jpg")
+        };
+        
+        return new WeatherViewModel(weatherImageUri, location.ToString());
+    }
+    
     private void SetViewBagLocation(Location selectedLocation)
     {
         var values =
@@ -49,12 +54,6 @@ public class HomeController : Controller
                 Selected = value == selectedLocation,
             };
 
-        ViewBag.Location = items;
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        ViewBag.Location = items.ToList();
     }
 }

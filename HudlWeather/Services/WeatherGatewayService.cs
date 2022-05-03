@@ -42,8 +42,7 @@ public class WeatherGatewayService : IWeatherGatewayService
 
         var uri = $"?lat={locationCoordinates[location].Lat}&lon={locationCoordinates[location].Lon}&appid={options.Value.ApiKey}";
 
-        return new Forecast();
-        // return 
-        //     await client.GetFromJsonAsync<Forecast>(uri) ?? throw new InvalidOperationException();
+        return 
+            await client.GetFromJsonAsync<Forecast>(uri) ?? throw new InvalidOperationException();
     }
 }
