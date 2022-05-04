@@ -4,7 +4,7 @@ using Hudl.Weather.Services.WeatherGatewayDto;
 
 namespace Hudl.Weather.Tests;
 
-public class WeatherGatewayTestDouble : IWeatherGatewayService
+public class StubWeatherGateway : IWeatherGatewayService
 {
     public Task<Forecast> Forecast(Location location)
     {

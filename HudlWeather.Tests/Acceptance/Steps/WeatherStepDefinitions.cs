@@ -15,7 +15,7 @@ public class WeatherStepDefinitions
     public WeatherStepDefinitions(AngleSharpDriver driver)
     {
         _driver = driver ?? throw new ArgumentNullException(nameof(driver));
-        _driver.AddTestService<IWeatherGatewayService>(new WeatherGatewayTestDouble());
+        _driver.AddTestService<IWeatherGatewayService>(new StubWeatherGateway());
     }
 
     [When(@"the default page is shown")]
