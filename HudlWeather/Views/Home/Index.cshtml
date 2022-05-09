@@ -4,12 +4,24 @@
     ViewData["Title"] = "Weather Page";
 }
 
+<style>
+    .weather {
+        display: inline-block;
+    }
+</style>
+
 <div class="text-center">
-    <h1>Weather at Home and Office</h1>
+    <h1 id="locationName">8 day weather forecast for @Model.LocationName</h1>
     <div>
-        <h1 id="locationName">@Model.LocationName</h1>
-        <img src="@Model.WeatherImageUri" width="500px"/>
+        @foreach (var item in Model.WeatherForecasts)
+        {
+            <div class="weather">
+                <img src="@item.WeatherImageUrl" width="125px" alt="@item.Description"  />
+                <div>@item.Description</div>
+            </div>
+        }        
     </div>
+    <div></div>
     <div>
         <form asp-action="Index">
             @(Html.DropDownList("Location"))

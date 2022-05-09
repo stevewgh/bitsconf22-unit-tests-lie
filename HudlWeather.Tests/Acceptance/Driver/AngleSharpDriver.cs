@@ -12,14 +12,14 @@ namespace Hudl.Weather.Tests.Acceptance.Driver;
 
 public class AngleSharpDriver
 {
-    private readonly ScenarioContext _scenarioContext;
+    private readonly ScenarioContext scenarioContext;
     private Lazy<HttpClient> Client { get; }
 
     private IHtmlDocument? Document { get; set; }
 
     public AngleSharpDriver(ScenarioContext scenarioContext, Lazy<HttpClient> client)
     {
-        _scenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
+        this.scenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
         Client = client ?? throw new ArgumentNullException(nameof(client));
     }
 
@@ -74,7 +74,7 @@ public class AngleSharpDriver
             serviceCollection.AddSingleton(service);
         }
 
-        this._scenarioContext.ScenarioContainer.RegisterInstanceAs((Action<IServiceCollection>) ServiceRegistration);
+        this.scenarioContext.ScenarioContainer.RegisterInstanceAs((Action<IServiceCollection>) ServiceRegistration);
     }
     
     private async Task ParseResponse(HttpResponseMessage defaultPage)

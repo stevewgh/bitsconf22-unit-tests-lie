@@ -1,24 +1,24 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hudl.Weather.Services;
-using Hudl.Weather.Services.WeatherGatewayDto;
+using Location = Hudl.Weather.Services.Location;
 
 namespace Hudl.Weather.Tests;
 
 public class StubWeatherGateway : IWeatherGatewayService
 {
-    public Task<Forecast> Forecast(Location location)
+    public Task<IEnumerable<Services.WeatherGatewayDto.Weather>> MultiDayWeatherForecast(Location location)
     {
-        if (location == Location.Home)
-        {
-            return Task.FromResult(new Forecast
+        IEnumerable<Services.WeatherGatewayDto.Weather> weatherConditions =
+            new List<Services.WeatherGatewayDto.Weather>()
             {
-                Weather = new[] {new Services.WeatherGatewayDto.Weather() {Main = "Cloudy"}}
-            });
-        }
-
-        return Task.FromResult(new Forecast
-        {
-            Weather = new[] {new Services.WeatherGatewayDto.Weather() {Main = "Sunny"}}
-        });
+                new() {Description = "Raining", Icon = "rain.png"},
+                new() {Description = "Clear", Icon = "clear.png"},
+                new() {Description = "Sunny", Icon = "sunny.png"},
+                new() {Description = "Snowing", Icon = "snow.png"},
+                new() {Description = "Misty", Icon = "misty.png"},
+            };
+        
+        return Task.FromResult( weatherConditions);
     }
 }

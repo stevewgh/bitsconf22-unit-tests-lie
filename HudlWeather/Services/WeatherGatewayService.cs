@@ -6,43 +6,38 @@ namespace Hudl.Weather.Services;
 
 public class WeatherGatewayService : IWeatherGatewayService
 {
+    private record CoOrd(double Lat, double Lon);
     private readonly IOptions<WeatherGatewayOption> options;
     private readonly HttpClient client;
+    private readonly Dictionary<Location, CoOrd> locationCoordinates = new()
+    {
+        {
+            Location.Home,
+            new CoOrd(52.486244,-1.890401)
+        },
+        {
+            Location.Office,
+            new CoOrd(40.8136,-96.681679)
+        }
+    };
 
     public WeatherGatewayService(IOptions<WeatherGatewayOption> options)
     {
         this.options = options ?? throw new ArgumentNullException(nameof(options));
         client = new HttpClient()
         {
-            BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather")
+            BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/")
         };
     }
-    
-    public async Task<Forecast> Forecast(Location location)
+
+    public async Task<IEnumerable<WeatherGatewayDto.Weather>> MultiDayWeatherForecast(Location location)
     {
-        var locationCoordinates = new Dictionary<Location, Coord>()
-        {
-            {
-                Location.Home,
-                new Coord
-                {
-                    Lat = 52.486244,
-                    Lon = -1.890401
-                }
-            },
-            {
-                Location.Office,
-                new Coord
-                {
-                    Lat = 40.8136,
-                    Lon = -96.681679
-                }
-            }
-        };
+        var uri =
+            $"onecall?lat={locationCoordinates[location].Lat}&lon={locationCoordinates[location].Lon}&appid={options.Value.ApiKey}&exclude=current,minutely,hourly,alerts";
 
-        var uri = $"?lat={locationCoordinates[location].Lat}&lon={locationCoordinates[location].Lon}&appid={options.Value.ApiKey}";
-
-        return 
-            await client.GetFromJsonAsync<Forecast>(uri) ?? throw new InvalidOperationException();
+        var fromJsonAsync = (await client.GetFromJsonAsync<Forecast>(uri));
+        return
+            fromJsonAsync?.Daily?.SelectMany(daily => daily.Weather) ??
+            throw new InvalidOperationException();
     }
 }

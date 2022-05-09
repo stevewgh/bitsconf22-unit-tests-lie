@@ -11,11 +11,11 @@ namespace Hudl.Weather.Tests.Acceptance.Hooks;
 [Binding]
 public class ScenarioHooks
 {
-    private readonly ScenarioContext _scenarioContext;
+    private readonly ScenarioContext scenarioContext;
 
     public ScenarioHooks(ScenarioContext scenarioContext)
     {
-        _scenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
+        this.scenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
     }
     
     [BeforeScenario]
@@ -29,7 +29,7 @@ public class ScenarioHooks
 
         var hostAddress = configuration["HostAddress"];
 
-        _scenarioContext.ScenarioContainer.RegisterInstanceAs(
+        scenarioContext.ScenarioContainer.RegisterInstanceAs(
             new Lazy<HttpClient>(() => 
                 hostAddress switch
                 {
@@ -53,9 +53,9 @@ public class ScenarioHooks
         var application = new WebApplicationFactory<Program>()
             .WithWebHostBuilder(builder =>
             {
-                if (_scenarioContext.ScenarioContainer.IsRegistered<Action<IServiceCollection>>())
+                if (scenarioContext.ScenarioContainer.IsRegistered<Action<IServiceCollection>>())
                 {
-                    var testServicesBuilder = _scenarioContext.ScenarioContainer.Resolve<Action<IServiceCollection>>();
+                    var testServicesBuilder = scenarioContext.ScenarioContainer.Resolve<Action<IServiceCollection>>();
                     builder.ConfigureTestServices(testServicesBuilder);
                 }
             });

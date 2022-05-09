@@ -1,3 +1,5 @@
 namespace Hudl.Weather.Models;
 
-public record WeatherViewModel(string WeatherImageUri, string LocationName);
+public record WeatherModel(string WeatherImageUrl, string Description);
+
+public record WeatherViewModel(IEnumerable<WeatherModel> WeatherForecasts, string LocationName);

@@ -2,16 +2,17 @@
 using Hudl.Weather.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Location = Hudl.Weather.Services.Location;
 
 namespace Hudl.Weather.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly IWeatherGatewayService _weatherGatewayService;
+    private readonly IWeatherGatewayService weatherGatewayService;
 
     public HomeController(IWeatherGatewayService weatherGatewayService)
     {
-        _weatherGatewayService = weatherGatewayService ?? throw new ArgumentNullException(nameof(weatherGatewayService));
+        this.weatherGatewayService = weatherGatewayService ?? throw new ArgumentNullException(nameof(weatherGatewayService));
     }
 
     public async Task<IActionResult> Index()
@@ -29,14 +30,12 @@ public class HomeController : Controller
 
     private async Task<WeatherViewModel> WeatherAtLocation(Location location)
     {
-        var forecast = await _weatherGatewayService.Forecast(location);
-        var weatherImageUri = forecast?.Weather.FirstOrDefault() switch
-        {
-            { } weather when weather.Main.StartsWith("Cloud") => Url.Content("~/img/cloudy.jpg"),
-            _ => Url.Content("~/img/sunny.jpg")
-        };
+        var forecast = await weatherGatewayService.MultiDayWeatherForecast(location);
+
+        var forecasts = forecast.Select(weather =>
+            new WeatherModel(Url.Content($@"~/img/{weather.Icon}@4x.png"), weather.Description));
         
-        return new WeatherViewModel(weatherImageUri, location.ToString());
+        return new WeatherViewModel(forecasts, location.ToString());
     }
     
     private void SetViewBagLocation(Location selectedLocation)

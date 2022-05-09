@@ -1,5 +1,5 @@
 Feature: Hudl Weather
-A very user specific weather app.
+An extremely user specific weather app.
 
     Scenario: Weather conditions at home are shown first
         When the default page is shown
@@ -7,7 +7,7 @@ A very user specific weather app.
         Then the location name Home is displayed
 
     Scenario: Weather conditions are shown on demand
-        Given the user selected the <location> location
+        Given the user selected the <location> option
         Then the location name <location name> is displayed
 
     Examples:
