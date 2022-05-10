@@ -30,5 +30,5 @@ public class FakeUrlHelper : IUrlHelper
         throw new System.NotImplementedException();
     }
 
-    public ActionContext ActionContext { get; }
+    public ActionContext ActionContext { get; } = new();
 }
