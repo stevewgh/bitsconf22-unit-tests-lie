@@ -5,13 +5,26 @@
 }
 
 <style>
+
     .weather {
         display: inline-block;
+    }
+    
+    .weather img {
+        padding-bottom: 1px
+    }
+
+    .weather div {
+        font-size: large;
+    }
+    
+    .formWrapper {
+        padding-top: 15px
     }
 </style>
 
 <div class="text-center">
-    <h1 id="locationName">8 day weather forecast for @Model.LocationName</h1>
+    <h1 id="locationName">@Model.WeatherForecasts.Count() day weather forecast for @Model.LocationName</h1>
     <div>
         @foreach (var item in Model.WeatherForecasts)
         {
@@ -22,7 +35,7 @@
         }        
     </div>
     <div></div>
-    <div>
+    <div class="formWrapper">
         <form asp-action="Index">
             @(Html.DropDownList("Location"))
             <button type="submit">Change</button>

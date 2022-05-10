@@ -6,8 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IWeatherGatewayService, WeatherGatewayService>();
-builder.Services.AddOptions<WeatherGatewayOption>().BindConfiguration(configSectionPath:"WeatherGateway");
+if (bool.TryParse(builder.Configuration["UseStub"], out var useStub) && useStub)
+{
+    builder.Services.AddSingleton<IWeatherGatewayService, StubWeatherGateway>();
+}
+else
+{
+    builder.Services.AddOptions<WeatherGatewayOption>().BindConfiguration(configSectionPath:"WeatherGateway");
+    builder.Services.AddSingleton<IWeatherGatewayService, WeatherGatewayService>();
+}
+
 builder.Services.AddHttpLogging(logging =>
 {
     logging.LoggingFields = HttpLoggingFields.RequestPath | HttpLoggingFields.RequestMethod;
