@@ -18,6 +18,10 @@ public class WeatherGatewayService : IWeatherGatewayService
         {
             Location.Office,
             new CoOrd(40.8136,-96.681679)
+        },
+        {
+            Location.Vacation,
+            new CoOrd(30.3968286,-9.5970171)
         }
     };
 

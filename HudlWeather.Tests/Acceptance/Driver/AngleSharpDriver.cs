@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Html.Dom;
@@ -48,7 +49,7 @@ public class AngleSharpDriver
             return locationNameElement.InnerHtml;
         }
     }
-    
+
     public async Task SelectLocation(string location)
     {
         var formContent = new FormUrlEncodedContent(new[]
@@ -57,13 +58,14 @@ public class AngleSharpDriver
         });
 
         var response = await Client.Value.PostAsync("/", formContent);
+        response.EnsureSuccessStatusCode();
         await ParseResponse(response);
-    } 
-    
+    }
+
     public async Task LoadDefaultPage()
     {
         var defaultPage = await Client.Value.GetAsync("/");
-
+        defaultPage.EnsureSuccessStatusCode();
         await ParseResponse(defaultPage);        
     }
 
@@ -76,11 +78,12 @@ public class AngleSharpDriver
 
         this.scenarioContext.ScenarioContainer.RegisterInstanceAs((Action<IServiceCollection>) ServiceRegistration);
     }
-    
-    private async Task ParseResponse(HttpResponseMessage defaultPage)
+
+    private async Task ParseResponse(HttpResponseMessage response)
     {
         var parser = new HtmlParser();
-        var doc = await parser.ParseDocumentAsync(await defaultPage.Content.ReadAsStreamAsync());
+        var stream = await response.Content.ReadAsStreamAsync();
+        var doc = await parser.ParseDocumentAsync(stream);
         this.Document = doc;
     }
 }

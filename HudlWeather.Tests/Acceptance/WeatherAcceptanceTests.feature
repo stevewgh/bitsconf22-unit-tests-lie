@@ -1,5 +1,5 @@
 Feature: Hudl Weather
-An extremely user specific weather app.
+A user specific weather app ☀️🌧❄️.
 
     Scenario: Weather conditions at home are shown first
         When the default page is shown
@@ -14,3 +14,4 @@ An extremely user specific weather app.
       | location | location name |
       | home     | Home          |
       | office   | Office        |
+      | vacation | Vacation      |

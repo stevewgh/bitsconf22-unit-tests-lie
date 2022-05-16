@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Hudl.Weather.Services;
 using Hudl.Weather.Tests.Acceptance.Driver;
 using TechTalk.SpecFlow;
 
@@ -15,7 +14,6 @@ public class WeatherStepDefinitions
     public WeatherStepDefinitions(AngleSharpDriver driver)
     {
         this.driver = driver ?? throw new ArgumentNullException(nameof(driver));
-        this.driver.AddTestService<IWeatherGatewayService>(new StubWeatherGateway());
     }
 
     [When(@"the default page is shown")]

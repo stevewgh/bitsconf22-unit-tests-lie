@@ -40,17 +40,17 @@ public class HomeController : Controller
     
     private void SetViewBagLocation(Location selectedLocation)
     {
-        var values =
+        var locations =
             Enum.GetValues(typeof(Location))
                 .Cast<Location>();
 
         var items =
-            from value in values
+            from location in locations
             select new SelectListItem
             {
-                Text = value.ToString(),
-                Value = value.ToString(),
-                Selected = value == selectedLocation,
+                Text = location.ToString(),
+                Value = location.ToString(),
+                Selected = location == selectedLocation,
             };
 
         ViewBag.Location = items.ToList();

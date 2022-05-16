@@ -37,7 +37,7 @@ public class HomeControllerTests
         var model = result?.Model as WeatherViewModel;
         model!.WeatherForecasts.Should().HaveCountGreaterThan(0);
     }
-    
+
     [Fact]
     public async Task When_Location_Changes_Then_Model_Is_Correct_Location()
     {

@@ -6,6 +6,9 @@
 # Rider
 *.idea
 
+# SpecFlow
+*.feature.cs
+
 # User-specific files
 *.rsuser
 *.suo
