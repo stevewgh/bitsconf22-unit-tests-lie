@@ -1,5 +1,5 @@
 Feature: Hudl Weather
-A user specific weather app ☀️🌧❄️.
+A weather app for me! ☀️🌧❄️.
 
     Scenario: Weather conditions at home are shown first
         When the default page is shown
