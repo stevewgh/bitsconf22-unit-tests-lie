@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Hudl.Weather.Tests.Acceptance.Driver;
@@ -38,5 +40,12 @@ public class WeatherStepDefinitions
     public void ThenTheLocationNameIsDisplayed(string locationName)
     {
         driver.SelectedLocationText.Should().EndWith(locationName);
+    }
+
+    [Given(@"I run the test ""(.*)""")]
+    public async Task ThenIRunTheTest(string testPath)
+    {
+        var currentPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        await driver.SendAntiochRequest(new FileInfo(Path.Combine(currentPath!, "Acceptance", testPath)));
     }
 }

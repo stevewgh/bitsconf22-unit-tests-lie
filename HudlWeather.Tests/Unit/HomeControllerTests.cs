@@ -10,46 +10,21 @@ namespace Hudl.Weather.Tests.Unit;
 
 public class HomeControllerTests
 {
-    [Fact]
-    public async Task The_Index_Page_Displays_Home_As_The_Default_Location()
+    [Theory]
+    [InlineData(Location.Home, "Home")]
+    [InlineData(Location.Office, "Office")]
+    [InlineData(Location.Vacation, "Vacation")]
+    public async Task When_Location_Changes_Then_Model_Is_Correct_Location(Location location, string expectedLocationName)
     {
         //  arrange
         var sut = BuildController();
 
         //  act
-        var result = await sut.Index() as ViewResult;
+        var result = await sut.Index(location) as ViewResult;
 
         //  assert
         var model = result?.Model as WeatherViewModel;
-        Assert.Equal("Home", model?.LocationName);
-    }
-
-    [Fact]
-    public async Task The_Index_Page_Has_Weather_Forecasts()
-    {
-        //  arrange
-        var sut = BuildController();
-
-        //  act
-        var result = await sut.Index() as ViewResult;
-
-        //  assert
-        var model = result?.Model as WeatherViewModel;
-        model!.WeatherForecasts.Should().HaveCountGreaterThan(0);
-    }
-
-    [Fact]
-    public async Task When_Location_Changes_Then_Model_Is_Correct_Location()
-    {
-        //  arrange
-        var sut = BuildController();
-
-        //  act
-        var result = await sut.Index(Location.Office) as ViewResult;
-
-        //  assert
-        var model = result?.Model as WeatherViewModel;
-        model!.LocationName.Should().Be("Office");
+        model!.LocationName.Should().Be(expectedLocationName);
     }
 
     private static HomeController BuildController()

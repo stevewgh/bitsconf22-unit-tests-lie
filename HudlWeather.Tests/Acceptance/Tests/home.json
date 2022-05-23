@@ -1,0 +1,14 @@
+{
+  "description": "Post a hello world request 10 times, results returns 200",
+  "request": {
+    "method": "POST",
+    "endpoint": "/",
+    "payload": {
+      "location": "Home"
+    }
+  },
+  "response": {
+    "code": 200,
+    "payload": "Number of Successful Bifrost Calls=10, Generated payload in utf-16 byte size: 18. Payload generation time: N/A milliseconds."
+  }
+}

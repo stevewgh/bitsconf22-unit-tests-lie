@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
@@ -50,6 +52,20 @@ public class AngleSharpDriver
         }
     }
 
+    public async Task SendAntiochRequest(FileInfo fileLocation)
+    {
+        var file = File.OpenRead(fileLocation.FullName);
+        var document = await JsonDocument.ParseAsync(file);
+
+        var method = document.RootElement.GetProperty("request").GetProperty("method").GetString();
+        var endpoint = document.RootElement.GetProperty("request").GetProperty("endpoint").GetString();
+        var payload = document.RootElement.GetProperty("request").GetProperty("payload").GetRawText();
+
+        var response = await this.Client.Value.PostAsync(endpoint, new StringContent(payload));
+        response.EnsureSuccessStatusCode();
+        await ParseResponse(response);
+    }
+    
     public async Task SelectLocation(string location)
     {
         var formContent = new FormUrlEncodedContent(new[]

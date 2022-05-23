@@ -31,4 +31,10 @@
       <ProjectReference Include="..\HudlWeather\HudlWeather.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="Acceptance\Tests\home.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
