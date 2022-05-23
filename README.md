@@ -1,7 +1,7 @@
 # bitsconf22-unit-tests-lie
 
 ## Google Slides
-https://docs.google.com/presentation/d/1ZOWpaBPDcXzlLdz_6BokOC9KB-oJAKkEyivOats4JDg/edit#slide=id.g4e243302f9_0_7
+[Slide Deck](https://docs.google.com/presentation/d/1QUkBQpqhWZUe0c0IiYIUYMu2AQG35NX_YeC2kY0pdrA/edit#slide=id.g12df887ea6a_0_18)
 
 ## Requirements
 In order to run the application you will need to create an API key with https://openweathermap.org/.
