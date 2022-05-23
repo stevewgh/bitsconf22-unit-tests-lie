@@ -1,5 +1,5 @@
 Feature: Hudl Weather
-A weather app for me! ☀️🌧❄️.
+A weather app just for me! ☀️🌧❄️.
 
     Scenario: Weather conditions are shown on demand
         Given the user selected the <location> option
