@@ -10,8 +10,3 @@ A weather app just for me! ☀️🌧❄️.
       | home     | Home          |
       | office   | Office        |
       | vacation | Vacation      |
-
-
-    Scenario: Weather conditions are shown on demand using Antioch approach
-        Given I run the test "tests/home.json"
-        Then the location name Home is displayed

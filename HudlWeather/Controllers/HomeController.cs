@@ -6,7 +6,7 @@ using Location = Hudl.Weather.Services.Location;
 
 namespace Hudl.Weather.Controllers;
 
-public class HomeController : Controller
+public partial class HomeController : Controller
 {
     private readonly IWeatherGatewayService weatherGatewayService;
 
@@ -19,13 +19,6 @@ public class HomeController : Controller
     {
         SetViewBagLocation(Location.Home);
         return View(await WeatherAtLocation(Location.Home));
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Index([FromForm] Location weatherLocation)
-    {
-        SetViewBagLocation(weatherLocation);
-        return View(await WeatherAtLocation(weatherLocation));
     }
 
     private async Task<WeatherViewModel> WeatherAtLocation(Location location)
