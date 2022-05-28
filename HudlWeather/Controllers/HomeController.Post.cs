@@ -6,10 +6,10 @@ namespace Hudl.Weather.Controllers;
 public partial class HomeController
 {
     [HttpPost]
-    public async Task<IActionResult> Index([FromForm] Location location)
+    public async Task<IActionResult> Index([FromForm] Location weatherLocation)
     {
-        SetViewBagLocation(location);
-        var viewModel = await WeatherAtLocation(location);
+        SetViewBagLocation(weatherLocation);
+        var viewModel = await WeatherAtLocation(weatherLocation);
         return View(viewModel);
     }
 }
